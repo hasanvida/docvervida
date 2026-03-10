@@ -1,4 +1,4 @@
-const { v4: uuidv4 } = require("uuid")
+const { randomUUID } = require("crypto")
 
 exports.handler = async (event) => {
 
@@ -7,9 +7,8 @@ try{
 const body = JSON.parse(event.body)
 const image = body.image
 
-// generate values
-const partnerTrxId = uuidv4()
-const groupId = uuidv4()
+const partnerTrxId = randomUUID()
+const groupId = randomUUID()
 const epoch = Math.floor(Date.now()/1000)
 
 
@@ -31,7 +30,6 @@ client_secret:process.env.VIDA_CLIENT_SECRET
 )
 
 const tokenData = await tokenRes.json()
-
 const accessToken = tokenData.access_token
 
 
